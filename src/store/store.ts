@@ -6,9 +6,8 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export interface StoreState {
     characters: Character[]
-    characterProps: CharacterProps[]
+    characterProps: CharacterProps
 }
-
 
 export const store = configureStore<StoreState>({
     reducer: {
@@ -19,7 +18,6 @@ export const store = configureStore<StoreState>({
 })
 
 export type AppDispatch = typeof store.dispatch
-// export type RootState = ReturnType<typeof store.getState>
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<StoreState> = useSelector
