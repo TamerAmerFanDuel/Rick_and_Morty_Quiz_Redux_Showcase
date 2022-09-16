@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
 import { StoreState, useAppDispatch, useAppSelector } from "../store/store"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { addCharacter } from "../store/characterSlice"
 import { Character, Result } from "../store/types"
 import { fetchCharacters } from "../store/characterPropSlice"
 
 const CharacterList = () => {
+
+    const [ name, setName ] = useState("")
 
     const fetchedProps = useAppSelector((state: StoreState) => state.characterProps)
     const fetchedCharacters = useSelector((state:StoreState)=> state.characters)
@@ -46,6 +48,9 @@ const CharacterList = () => {
             <>
                 <p>{character.name}</p>
                 <img src={character.image} alt={character.name} width="200" height="200"/>
+                <form>
+                    <input type="text" placeholder="Who am i?.." onChange={event =>{setName(event.target.value)}} value={name}></input>
+                </form>
             </>
         )
     })
