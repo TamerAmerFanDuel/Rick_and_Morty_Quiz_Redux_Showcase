@@ -1,6 +1,6 @@
 export interface CharacterProps {
     info: Info,
-    results: Result[]
+    results: CharacterResult[]
 }
 
 export interface Info {
@@ -10,13 +10,7 @@ export interface Info {
     prev: null
 }
 
-export interface Character {
-    id: number,
-    name: string,
-    image: string
-}
-
-export interface Result{
+export interface CharacterResult{
     id: number,
     name: string,
     status: string,

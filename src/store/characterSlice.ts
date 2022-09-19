@@ -1,24 +1,29 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { CharacterProps } from "./types";
-import { Character } from "./types";
+import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { CharacterProps } from "./types";
 
-export const initialState: Character[] = []
+export const initialState: CharacterProps = {
+    info: {
+        count: 0,
+        pages: 0,
+        next: "",
+        prev: null
+     },
+    results: []
+}
 
-const createCharacter = ( characterObject : Character): Character => ({
-    id : characterObject.id,
-    name : characterObject.name,
-    image : characterObject.image
+export const fetchCharacters = createAsyncThunk<
+CharacterProps
+>("characters/fetchCharacters", async() => {
+    const response = await fetch("https://rickandmortyapi.com/api/character").then((response)=> response.json())
+    return response
 })
 
 export const characterSlice = createSlice({
     name: "characters",
     initialState,
     reducers: {
-        addCharacter: (state, action: PayloadAction<Character>) => {
-            const character = createCharacter(action.payload)
-            state.push(character)
-        },
-    }, 
+    },
+    extraReducers: builder =>
+        builder.addCase(fetchCharacters.fulfilled, (_, action)=> action.payload) 
 })
-
-export const {addCharacter} = characterSlice.actions
