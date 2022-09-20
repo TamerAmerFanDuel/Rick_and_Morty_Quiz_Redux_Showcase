@@ -15,7 +15,7 @@ export const initialState: CharacterProps = {
 export const fetchCharacters = createAsyncThunk<
 CharacterProps
 >("characters/fetchCharacters", async() => {
-    const response = await fetch("https://rickandmortyapi.com/api/character").then((response)=> response.json())
+    const response = await fetch("https://rickandmortyapi.com/api/character?page=1").then((response)=> response.json())
     return response
 })
 

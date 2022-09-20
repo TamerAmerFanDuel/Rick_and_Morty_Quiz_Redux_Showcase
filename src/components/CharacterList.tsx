@@ -1,6 +1,7 @@
 import { StoreState, useAppDispatch, useAppSelector } from "../store/store"
 import { useState, useEffect } from "react"
 import { fetchCharacters } from "../store/characterSlice"
+import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material"
 
 const CharacterList = () => {
     const [ name, setName ] = useState("")
@@ -14,21 +15,31 @@ const CharacterList = () => {
 
     const showResults = fetchedCharacters.results.map((character)=>{
         return(
-            <>
-                <p>{character.name}</p>
-                <img src={character.image} alt={character.name} width="200" height="200"/>
-                <form>
-                    <input type="text" placeholder="Who am i?.." onChange={event =>{setName(event.target.value)}} value={name}></input>
-                </form>
-            </>
+            <Grid item xs={3}>
+                <Card sx={{ maxWidth: 345 }}>
+                    <CardMedia 
+                        id={String(character.id)}
+                        component="img"
+                        height="300"
+                        src={character.image}
+                        alt={character.name}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            <form>
+                                <input type="text" placeholder="Who am i?.." onChange={event =>{setName(event.target.value)}} value={name}></input>
+                            </form>
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
         )
     })
 
     return(
-        <>
+        <Grid container spacing={1}>
             {showResults}
-            <p>{JSON.stringify(fetchedCharacters,null,2)}</p>
-        </>
+        </Grid>
     )
 }
 
