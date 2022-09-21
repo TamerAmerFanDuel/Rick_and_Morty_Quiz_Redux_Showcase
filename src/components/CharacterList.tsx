@@ -1,45 +1,36 @@
 import { StoreState, useAppDispatch, useAppSelector } from "../store/store"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { fetchCharacters } from "../store/characterSlice"
-import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material"
+import { Grid, Pagination } from "@mui/material"
+import CharacterCard from "./CharacterCard"
 
 const CharacterList = () => {
-    const [ name, setName ] = useState("")
 
-    const fetchedCharacters = useAppSelector((state:StoreState)=> state.characters)
+    const fetchedCharacters = useAppSelector((state:StoreState)=> state.character)
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
-        dispatch(fetchCharacters())
+        dispatch(fetchCharacters(1))
     },[dispatch])
 
     const showResults = fetchedCharacters.results.map((character)=>{
         return(
-            <Grid item xs={3}>
-                <Card sx={{ maxWidth: 345 }}>
-                    <CardMedia 
-                        id={String(character.id)}
-                        component="img"
-                        height="300"
-                        src={character.image}
-                        alt={character.name}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            <form>
-                                <input type="text" placeholder="Who am i?.." onChange={event =>{setName(event.target.value)}} value={name}></input>
-                            </form>
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
+            CharacterCard(character)
         )
     })
 
+    const handleChange=(pageChange: number)=>{
+        dispatch(fetchCharacters(pageChange))
+    }
+
+
     return(
-        <Grid container spacing={1}>
-            {showResults}
-        </Grid>
+        <>
+            <Pagination count={fetchedCharacters.info.pages} page={fetchedCharacters.info.currentPage} onChange={(_,pageChange)=>{handleChange(pageChange)}}/>
+            <Grid container spacing={1}>
+                {showResults}
+            </Grid>
+        </>
     )
 }
 
