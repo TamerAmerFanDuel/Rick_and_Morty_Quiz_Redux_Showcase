@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { characterSlice } from "./characterSlice"
-import { CharacterProps } from "./types"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import { CharacterState } from "./characterSlice"
 
 export interface StoreState {
-    characters: CharacterProps
+    character: CharacterState
 }
 
 export const store = configureStore<StoreState>({
 	reducer: {
-		characters: characterSlice.reducer,
+		character: characterSlice.reducer,
 	},
 	devTools: true
 })

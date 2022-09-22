@@ -1,13 +1,17 @@
+
 export interface CharacterProps {
-    info: Info,
+    info: Info
     results: CharacterResult[]
 }
 
 export interface Info {
     count: number
     pages: number
-    next: string
-    prev: null
+    next: null | string
+    prev: null | string
+}
+export interface CharacterPageInfo extends Info{
+    currentPage: number
 }
 
 export interface CharacterResult{
