@@ -15,7 +15,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
     const [ name, setName ] = useState("")
 
     return(
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
             <Card>
                 <CardMedia 
                     id={String(character.id)}
