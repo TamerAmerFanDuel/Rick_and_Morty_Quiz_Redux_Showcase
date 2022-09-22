@@ -26,11 +26,11 @@ const CharacterList = () => {
         <Container maxWidth="lg">
             <Box sx={{ flexGrow: 3 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
                         <PageSelector/>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Pagination count={fetchedCharacters.info.pages} page={fetchedCharacters.info.currentPage} onChange={(_,pageChange)=>{handleChange(pageChange)}}/>
+                    <Grid item xs={7}>
+                        <Pagination sx={{m: 0.1, mt: 4}} count={fetchedCharacters.info.pages} page={fetchedCharacters.info.currentPage} onChange={(_,pageChange)=>{handleChange(pageChange)}}/>
                     </Grid>
                 </Grid>
             </Box>

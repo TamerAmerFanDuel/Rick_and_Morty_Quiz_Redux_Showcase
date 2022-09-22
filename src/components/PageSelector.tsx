@@ -46,7 +46,7 @@ export default function PageSelector() {
 
     return (
         <div>
-        <FormControl sx={{ m: 1, width: 65, mt: 3 }}>
+        <FormControl sx={{ m: 0.1, width: 65, mt: 3 }}>
             <Select
             value={String(fetchedCharacters.info.currentPage)}
             onChange={handleChange}
