@@ -46,7 +46,7 @@ export const characterSlice = createSlice({
     },
     extraReducers: builder =>
         builder.addCase(fetchCharacters.fulfilled, (state, action)=> {
-            const filteredResults = action.payload.results.filter(result=>badID.includes(result.id))
+            const filteredResults = action.payload.results.filter(result=>!badID.includes(result.id))
             state.results=filteredResults
             state.info = action.payload.info
         }) 
