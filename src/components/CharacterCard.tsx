@@ -27,10 +27,8 @@ const ValidationTextField = styled(TextField)({
 const CharacterCard: React.FC<CharacterCardProps> = ({
 	character
 }) => {
-
-
-
 	const [ name, setName ] = useState("")
+	const isGuessCorrect = name.toLocaleLowerCase().trim() === character.name.toLocaleLowerCase().trim()
 
 	return(
 		<Grid item xs={12} sm={6} md={4} lg={3}>
@@ -43,24 +41,16 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
 					alt={character.name}
 				/>
 				<CardContent>
-					{name.toLocaleLowerCase().trim() === character.name.toLocaleLowerCase().trim() ?
 					<ValidationTextField
-					disabled
-					value={character.name}
-					variant="outlined"
-					label={<span>✅</span>}
+						id="validation-outlined-input"
+						disabled={isGuessCorrect}
+						value={isGuessCorrect ? character.name : name}
+						variant="outlined"
+						label={isGuessCorrect ? <span>✅</span> : "Who am I?.."}
+						inputProps={{pattern: [character.name.toLocaleLowerCase()]}}
+						onChange={event => setName(event.target.value)}
+						required
 					/>
-					:
-					<ValidationTextField
-					required
-					variant="outlined"
-					label="Who am I?.."
-					id="validation-outlined-input"
-					onChange={event => setName(event.target.value)}
-					inputProps={{pattern: [character.name.toLocaleLowerCase()]}}
-					value={name}
-					/>
-					}  
 				</CardContent>
 			</Card>
 		</Grid>
