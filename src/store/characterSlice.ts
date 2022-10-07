@@ -1,11 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CharacterProps, CharacterPageInfo, CharacterResult } from "./types";
 
 export interface CharacterState{
     info: CharacterPageInfo,
     results: CharacterResult[],
+    correctGuesses: string[]
 }
+
 
 export const initialState: CharacterState = {
     info:{
@@ -15,21 +17,22 @@ export const initialState: CharacterState = {
         prev: null,
         currentPage: 1
     },
-    results:[]
+    results:[],
+    correctGuesses: []
 }
 
-export const fetchCharacters = createAsyncThunk<CharacterState, number>(
+export const fetchCharacters = createAsyncThunk<Pick<CharacterState, "info" | "results">, number>(
     "characters/fetchCharacters",
     async(page: number) => {
         const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
             .then((response)=> response.json())
-            .then((data: CharacterProps): CharacterState =>{
+            .then((data: CharacterProps): Pick<CharacterState, "info" | "results"> =>{
                 return{
                     info:{
                         ...data.info, 
                         currentPage: page
                     },
-                    results: data.results
+                    results: data.results,
                 }
                 
             })
@@ -43,6 +46,9 @@ export const characterSlice = createSlice({
     name: "characters",
     initialState,
     reducers: {
+        addCorrectGuess: (state,action: PayloadAction<string>) => {
+            state.correctGuesses.push(action.payload)
+        }
     },
     extraReducers: builder =>
         builder.addCase(fetchCharacters.fulfilled, (state, action)=> {
@@ -51,3 +57,9 @@ export const characterSlice = createSlice({
             state.info = action.payload.info
         }) 
 })
+
+export const { addCorrectGuess } = characterSlice.actions
+
+const correctGuessesjson = window.localStorage.getItem("persist:root")
+const filteredGuesses = typeof correctGuessesjson === "string" ? JSON.parse(correctGuessesjson) : { correctGuesses: [] }
+export const correctGuesses = filteredGuesses.correctGuesses

@@ -9,6 +9,7 @@ import PageSelector from "./PageSelector"
 
 const CharacterList = () => {
 
+
     const theme = useTheme();
     const shouldShowPagination = useMediaQuery(theme.breakpoints.up('sm'));
     

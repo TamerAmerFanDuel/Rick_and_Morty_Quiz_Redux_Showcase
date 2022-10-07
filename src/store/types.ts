@@ -1,3 +1,6 @@
+export interface CorrectGuesses extends CharacterProps {
+    correctGuesses: string[]
+}
 
 export interface CharacterProps {
     info: Info
