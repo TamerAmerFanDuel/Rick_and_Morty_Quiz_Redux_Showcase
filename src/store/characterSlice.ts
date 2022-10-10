@@ -48,6 +48,9 @@ export const characterSlice = createSlice({
     reducers: {
         addCorrectGuess: (state,action: PayloadAction<string>) => {
             state.correctGuesses.push(action.payload)
+        },
+        resetCorrectGuesses:  (state, _: PayloadAction<undefined>) => {
+            state.correctGuesses.length=0
         }
     },
     extraReducers: builder =>
@@ -58,8 +61,5 @@ export const characterSlice = createSlice({
         }) 
 })
 
-export const { addCorrectGuess } = characterSlice.actions
+export const { addCorrectGuess, resetCorrectGuesses } = characterSlice.actions
 
-const correctGuessesjson = window.localStorage.getItem("persist:root")
-const filteredGuesses = typeof correctGuessesjson === "string" ? JSON.parse(correctGuessesjson) : { correctGuesses: [] }
-export const correctGuesses = filteredGuesses.correctGuesses
