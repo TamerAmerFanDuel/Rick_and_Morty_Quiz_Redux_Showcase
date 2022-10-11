@@ -1,6 +1,10 @@
 import { StoreState, useAppDispatch, useAppSelector } from "../store/store"
 import { useEffect } from "react"
-import { fetchCharacters, resetCorrectGuesses } from "../store/characterSlice"
+import {
+	badID,
+	fetchCharacters,
+	resetCorrectGuesses,
+} from "../store/characterSlice"
 import {
 	Box,
 	Grid,
@@ -69,7 +73,8 @@ const CharacterList = () => {
 							{fetchedCharacters.results.length}
 						</Typography>
 						<Typography>
-							Total Score: {fetchedCharacters.correctGuesses.length}/821
+							Total Score: {fetchedCharacters.correctGuesses.length}/
+							{fetchedCharacters.info.count - badID.length}
 						</Typography>
 					</Grid>
 					<Grid item sm={1}>
@@ -83,6 +88,29 @@ const CharacterList = () => {
 				{fetchedCharacters.results.map((character) => (
 					<CharacterCard key={character.id} character={character} />
 				))}
+			</Grid>
+			<Grid
+				container
+				spacing={2}
+				direction="row"
+				justifyContent="center"
+				alignItems="center"
+			>
+				<Grid item sm={1}>
+					<PageSelector />
+				</Grid>
+				{shouldShowPagination && (
+					<Grid item sm={10}>
+						<Pagination
+							sx={{ m: 0.1, mt: 4 }}
+							count={fetchedCharacters.info.pages}
+							page={fetchedCharacters.info.currentPage}
+							onChange={(_, pageChange) => {
+								handleChange(pageChange)
+							}}
+						/>
+					</Grid>
+				)}
 			</Grid>
 		</Container>
 	)
