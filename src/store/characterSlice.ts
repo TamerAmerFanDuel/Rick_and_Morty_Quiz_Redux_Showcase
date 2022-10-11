@@ -38,10 +38,18 @@ export const fetchCharacters = createAsyncThunk<CharacterState, number>(
 	}
 )
 
+const badID = [19, 66, 104, 189, 249]
+
 export const characterSlice = createSlice({
 	name: "characters",
 	initialState,
 	reducers: {},
 	extraReducers: (builder) =>
-		builder.addCase(fetchCharacters.fulfilled, (_, action) => action.payload),
+		builder.addCase(fetchCharacters.fulfilled, (state, action) => {
+			const filteredResults = action.payload.results.filter(
+				(result) => !badID.includes(result.id)
+			)
+			state.results = filteredResults
+			state.info = action.payload.info
+		}),
 })
