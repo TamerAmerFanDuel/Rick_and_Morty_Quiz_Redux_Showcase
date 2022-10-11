@@ -1,10 +1,10 @@
 import CharacterList from "../components/CharacterList"
 
 const QuizContainer = () => {
-    return (
-        <>
-            <CharacterList/>
-        </>
-    )
+	return (
+		<>
+			<CharacterList />
+		</>
+	)
 }
 export default QuizContainer
