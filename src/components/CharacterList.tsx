@@ -37,7 +37,6 @@ const CharacterList = () => {
 	const currentLevelCorrect = fetchedCharacters.results.filter((result) =>
 		fetchedCharacters.correctGuesses.includes(String(result.id))
 	)
-	console.log(currentLevelCorrect)
 
 	return (
 		<Container maxWidth="lg">
