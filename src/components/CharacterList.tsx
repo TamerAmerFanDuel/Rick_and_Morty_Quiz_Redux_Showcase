@@ -8,6 +8,7 @@ import {
 	useMediaQuery,
 	useTheme,
 	Button,
+	Typography,
 } from "@mui/material"
 import CharacterCard from "./CharacterCard"
 import { Container } from "@mui/system"
@@ -33,6 +34,10 @@ const CharacterList = () => {
 	const handleReset = () => {
 		dispatch(resetCorrectGuesses())
 	}
+	const currentLevelCorrect = fetchedCharacters.results.filter((result) =>
+		fetchedCharacters.correctGuesses.includes(String(result.id))
+	)
+	console.log(currentLevelCorrect)
 
 	return (
 		<Container maxWidth="lg">
@@ -48,7 +53,7 @@ const CharacterList = () => {
 						<PageSelector />
 					</Grid>
 					{shouldShowPagination && (
-						<Grid item sm={10}>
+						<Grid item sm={6}>
 							<Pagination
 								sx={{ m: 0.1, mt: 4 }}
 								count={fetchedCharacters.info.pages}
@@ -59,6 +64,15 @@ const CharacterList = () => {
 							/>
 						</Grid>
 					)}
+					<Grid item sm={4}>
+						<Typography>
+							Current Level Score: {currentLevelCorrect.length}/
+							{fetchedCharacters.results.length}
+						</Typography>
+						<Typography>
+							Total Score: {fetchedCharacters.correctGuesses.length}/821
+						</Typography>
+					</Grid>
 					<Grid item sm={1}>
 						<Button variant="contained" onClick={handleReset}>
 							RESET
