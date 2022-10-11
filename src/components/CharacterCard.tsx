@@ -3,21 +3,16 @@ import { CharacterResult } from "../store/types"
 import { useState } from "react"
 
 interface CharacterCardProps {
-    character: CharacterResult
+	character: CharacterResult
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({
-	character
-}) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+	const [name, setName] = useState("")
 
-
-
-	const [ name, setName ] = useState("")
-
-	return(
+	return (
 		<Grid item xs={12} sm={6} md={4} lg={3}>
 			<Card>
-				<CardMedia 
+				<CardMedia
 					id={String(character.id)}
 					component="img"
 					height="300"
@@ -25,8 +20,14 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
 					alt={character.name}
 				/>
 				<CardContent>
-
-					<TextField label="Who am I?.." variant="outlined" value={name} onChange={event => {setName(event.target.value)}}/>                    
+					<TextField
+						label="Who am I?.."
+						variant="outlined"
+						value={name}
+						onChange={(event) => {
+							setName(event.target.value)
+						}}
+					/>
 				</CardContent>
 			</Card>
 		</Grid>

@@ -20,19 +20,21 @@ const MenuProps = {
 	},
 }
 
-
-
 function getStyles(name: string, theme: Theme) {
 	return {
-		fontWeight: theme.typography.fontWeightRegular
+		fontWeight: theme.typography.fontWeightRegular,
 	}
 }
 
 export default function PageSelector() {
-
-	const dispatch=useAppDispatch()
-	const fetchedCharacters = useAppSelector((state:StoreState)=> state.character)
-	const totalPages = Array.from({length: fetchedCharacters.info.pages}, (_, i) => i + 1)
+	const dispatch = useAppDispatch()
+	const fetchedCharacters = useAppSelector(
+		(state: StoreState) => state.character
+	)
+	const totalPages = Array.from(
+		{ length: fetchedCharacters.info.pages },
+		(_, i) => i + 1
+	)
 	const theme = useTheme()
 	const [pageNr, setPageNr] = useState("")
 
