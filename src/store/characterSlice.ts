@@ -49,7 +49,7 @@ export const characterSlice = createSlice({
 		addCorrectGuess: (state, action: PayloadAction<string>) => {
 			state.correctGuesses.push(action.payload)
 		},
-		resetCorrectGuesses: (state, _: PayloadAction<undefined>) => {
+		resetCorrectGuesses: (state) => {
 			state.correctGuesses.length = 0
 		},
 	},
