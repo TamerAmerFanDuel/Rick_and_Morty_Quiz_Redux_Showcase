@@ -1,7 +1,14 @@
 import { StoreState, useAppDispatch, useAppSelector } from "../store/store"
 import { useEffect } from "react"
-import { fetchCharacters } from "../store/characterSlice"
-import { Box, Grid, Pagination, useMediaQuery, useTheme } from "@mui/material"
+import { fetchCharacters, resetCorrectGuesses } from "../store/characterSlice"
+import {
+	Box,
+	Grid,
+	Pagination,
+	useMediaQuery,
+	useTheme,
+	Button,
+} from "@mui/material"
 import CharacterCard from "./CharacterCard"
 import { Container } from "@mui/system"
 import PageSelector from "./PageSelector"
@@ -23,6 +30,10 @@ const CharacterList = () => {
 		dispatch(fetchCharacters(pageChange))
 	}
 
+	const handleReset = () => {
+		dispatch(resetCorrectGuesses())
+	}
+
 	return (
 		<Container maxWidth="lg">
 			<Box sx={{ flexGrow: 3 }}>
@@ -37,7 +48,7 @@ const CharacterList = () => {
 						<PageSelector />
 					</Grid>
 					{shouldShowPagination && (
-						<Grid item sm={11}>
+						<Grid item sm={10}>
 							<Pagination
 								sx={{ m: 0.1, mt: 4 }}
 								count={fetchedCharacters.info.pages}
@@ -48,6 +59,11 @@ const CharacterList = () => {
 							/>
 						</Grid>
 					)}
+					<Grid item sm={1}>
+						<Button variant="contained" onClick={handleReset}>
+							RESET
+						</Button>
+					</Grid>
 				</Grid>
 			</Box>
 			<Grid container spacing={1}>

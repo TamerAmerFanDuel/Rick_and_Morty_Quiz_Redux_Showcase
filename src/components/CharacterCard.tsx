@@ -7,7 +7,9 @@ import {
 	styled,
 } from "@mui/material"
 import { CharacterResult } from "../store/types"
-import { useState } from "react"
+import React, { useState } from "react"
+import { useAppDispatch, useAppSelector } from "../store/store"
+import { addCorrectGuess } from "../store/characterSlice"
 
 interface CharacterCardProps {
 	character: CharacterResult
@@ -32,9 +34,32 @@ const ValidationTextField = styled(TextField)({
 })
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+	const correctGuesses = useAppSelector(
+		(state) => state.character.correctGuesses
+	)
+
 	const [name, setName] = useState("")
-	const isGuessCorrect =
-		name.toLocaleLowerCase().trim() === character.name.toLocaleLowerCase().trim()
+	const isGuessCorrect = correctGuesses.includes(String(character.id))
+	const isGuessCorrectEvent = (guess: string) => {
+		return (
+			guess.toLocaleLowerCase().trim() ===
+			character.name.toLocaleLowerCase().trim()
+		)
+	}
+
+	const dispatch = useAppDispatch()
+
+	const handleChange = (
+		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	): void => {
+		event.preventDefault()
+		if (isGuessCorrectEvent(event.target.value)) {
+			dispatch(addCorrectGuess(String(character.id)))
+			setName("")
+		} else {
+			setName(event.target.value)
+		}
+	}
 
 	return (
 		<Grid item xs={12} sm={6} md={4} lg={3}>
@@ -54,7 +79,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 						variant="outlined"
 						label={isGuessCorrect ? <span>✅</span> : "Who am I?.."}
 						inputProps={{ pattern: [character.name.toLocaleLowerCase()] }}
-						onChange={(event) => setName(event.target.value)}
+						onChange={handleChange}
 						required
 					/>
 				</CardContent>
