@@ -69,10 +69,10 @@ const CharacterList = () => {
 							Current Level Score: {currentLevelCorrect.length}/
 							{fetchedCharacters.results.length}
 						</Typography>
-						<Typography>
+						{/* <Typography>
 							Total Score: {fetchedCharacters.correctGuesses.length}/
 							{fetchedCharacters.info.count}
-						</Typography>
+						</Typography> */}
 					</Grid>
 					<Grid item sm={1}>
 						<Button variant="contained" onClick={handleReset}>
