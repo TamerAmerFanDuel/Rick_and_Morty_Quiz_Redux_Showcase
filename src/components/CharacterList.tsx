@@ -1,10 +1,6 @@
 import { StoreState, useAppDispatch, useAppSelector } from "../store/store"
 import { useEffect } from "react"
-import {
-	badID,
-	fetchCharacters,
-	resetCorrectGuesses,
-} from "../store/characterSlice"
+import { fetchCharacters, resetCorrectGuesses } from "../store/characterSlice"
 import {
 	Box,
 	Grid,
@@ -74,7 +70,7 @@ const CharacterList = () => {
 						</Typography>
 						<Typography>
 							Total Score: {fetchedCharacters.correctGuesses.length}/
-							{fetchedCharacters.info.count - badID.length}
+							{fetchedCharacters.info.count}
 						</Typography>
 					</Grid>
 					<Grid item sm={1}>

@@ -40,7 +40,7 @@ export const fetchCharacters = createAsyncThunk<
 	return response
 })
 
-export const badID = [
+const badID = [
 	6, 19, 23, 39, 51, 52, 56, 62, 66, 95, 104, 111, 114, 116, 117, 120, 132, 158,
 	160, 163, 174, 175, 177, 179, 181, 189, 217, 218, 219, 249,
 ]
@@ -63,6 +63,7 @@ export const characterSlice = createSlice({
 			)
 			state.results = filteredResults
 			state.info = action.payload.info
+			state.info.count = state.info.count - badID.length
 		}),
 })
 
