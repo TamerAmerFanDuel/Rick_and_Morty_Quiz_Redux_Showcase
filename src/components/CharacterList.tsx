@@ -12,7 +12,7 @@ import {
 } from "@mui/material"
 import CharacterCard from "./CharacterCard"
 import { Container } from "@mui/system"
-import PageSelector from "./PageSelector"
+// import PageSelector from "./PageSelector"
 
 const CharacterList = () => {
 	const theme = useTheme()
