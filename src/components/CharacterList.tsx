@@ -12,6 +12,7 @@ import {
 } from "@mui/material"
 import CharacterCard from "./CharacterCard"
 import { Container } from "@mui/system"
+import PageSelector from "./PageSelector"
 // import PageSelector from "./PageSelector"
 
 const CharacterList = () => {
@@ -48,15 +49,15 @@ const CharacterList = () => {
 					justifyContent="center"
 					alignItems="center"
 				>
-					{/* <Grid item sm={1}>
+					<Grid item sm={1}>
 						<PageSelector />
-					</Grid> */}
+					</Grid>
 					{shouldShowPagination && (
 						<Grid item sm={6}>
 							<Pagination
 								sx={{ m: 0.1, mt: 4 }}
-								// count={fetchedCharacters.info.pages}
-								count={1}
+								count={fetchedCharacters.info.pages}
+								// count={1}
 								page={fetchedCharacters.info.currentPage}
 								onChange={(_, pageChange) => {
 									handleChange(pageChange)
@@ -69,10 +70,10 @@ const CharacterList = () => {
 							Current Level Score: {currentLevelCorrect.length}/
 							{fetchedCharacters.results.length}
 						</Typography>
-						{/* <Typography>
+						<Typography>
 							Total Score: {fetchedCharacters.correctGuesses.length}/
 							{fetchedCharacters.info.count}
-						</Typography> */}
+						</Typography>
 					</Grid>
 					<Grid item sm={1}>
 						<Button variant="contained" onClick={handleReset}>
