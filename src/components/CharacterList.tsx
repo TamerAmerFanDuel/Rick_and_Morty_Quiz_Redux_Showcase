@@ -94,15 +94,15 @@ const CharacterList = () => {
 				justifyContent="center"
 				alignItems="center"
 			>
-				{/* <Grid item sm={1}>
+				<Grid item sm={1}>
 					<PageSelector />
-				</Grid> */}
+				</Grid>
 				{shouldShowPagination && (
 					<Grid item sm={10}>
 						<Pagination
 							sx={{ m: 0.1, mt: 4 }}
-							// count={fetchedCharacters.info.pages}
-							count={2}
+							count={fetchedCharacters.info.pages}
+							// count={2}
 							page={fetchedCharacters.info.currentPage}
 							onChange={(_, pageChange) => {
 								handleChange(pageChange)
